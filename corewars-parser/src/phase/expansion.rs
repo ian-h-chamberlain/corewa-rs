@@ -24,7 +24,7 @@ pub struct Lines {
     pub origin: Option<String>,
 }
 
-/// Collect and subsitute all labels found in the input lines.
+/// Collect and substitute all labels found in the input lines.
 pub fn expand(mut text: Vec<String>, mut origin: Option<String>) -> Lines {
     let labels = collect_and_expand(&mut text);
 

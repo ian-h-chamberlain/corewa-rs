@@ -28,4 +28,4 @@ Taken from [Wilkie's benchmark](http://www.koth.org/wilkies/) on KOTH.
 
 ### WilMoo Benchmark
 
-Taken from the [WilMoo benchmar](http://www.koth.org/wilmoo/) on KOTH.
+Taken from the [WilMoo benchmark](http://www.koth.org/wilmoo/) on KOTH.
