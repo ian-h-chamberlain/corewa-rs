@@ -5,8 +5,8 @@ use std::{
     path::PathBuf,
 };
 
+use clap::Parser;
 use lazy_static::lazy_static;
-use structopt::StructOpt;
 
 use corewars_parser as parser;
 use corewars_sim::Core;
@@ -15,50 +15,49 @@ lazy_static! {
     static ref IO_SENTINEL: PathBuf = PathBuf::from("-");
 }
 
-#[derive(Debug, StructOpt)]
-#[structopt(rename_all = "kebab")]
+#[derive(Debug, Parser)]
+#[clap(rename_all = "kebab")]
 /// Parse, assemble, and save Redcode files
 struct CliOptions {
     /// The corewars subcommand to perform
-    #[structopt(subcommand)]
+    #[clap(subcommand)]
     command: Command,
 
     /// Print additional details while running
     // TODO(#26) hook this up to a log level
-    #[structopt(long, short)]
+    #[clap(long, short)]
     verbose: bool,
 
     /// Input file; use "-" to read from stdin
-    #[structopt(parse(from_os_str))]
     input_file: PathBuf,
 }
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 enum Command {
     /// Save/print a program in "load file" format
-    #[structopt(name = "dump")]
+    #[clap(name = "dump")]
     Dump {
         /// Output file; defaults to stdout ("-")
-        #[structopt(long, short, parse(from_os_str), default_value = IO_SENTINEL.to_str().unwrap())]
+        #[clap(long, short, default_value = "-")]
         output_file: PathBuf,
 
         /// Whether labels, expressions, macros, etc. should be resolved and
         /// expanded in the output
-        #[structopt(long, short = "E")]
+        #[clap(long, short = 'E')]
         no_expand: bool,
     },
 
     /// Run a warrior to completion
-    #[structopt(name = "run")]
+    #[clap(name = "run")]
     Run {
         /// The max number of cycles to run. Defaults to
-        #[structopt(long, short)]
+        #[clap(long, short)]
         max_cycles: Option<usize>,
     },
 }
 
 pub fn run() -> Result<(), Box<dyn Error>> {
-    let cli_options = CliOptions::from_args();
+    let cli_options = CliOptions::parse();
 
     let mut input = String::new();
 
