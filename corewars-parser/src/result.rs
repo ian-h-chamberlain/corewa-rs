@@ -37,7 +37,7 @@ impl<T> Result<T> {
         }
     }
 
-    /// Unwrap the parse result, panicking with the given mesasge if it was not an `Ok`.
+    /// Unwrap the parse result, panicking with the given message if it was not an `Ok`.
     pub fn expect(self, msg: &str) -> T {
         match self {
             Self::Ok(value, _) => value,
