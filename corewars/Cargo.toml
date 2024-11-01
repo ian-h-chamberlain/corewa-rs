@@ -15,7 +15,7 @@ description = "The classic programming battle game Core Wars"
 corewars-parser = { path = "../corewars-parser", version = "=0.2.0" }
 corewars-sim = { path = "../corewars-sim", version = "=0.2.0" }
 lazy_static = "1.5.0"
-clap = { version = "4.5.18", features = ["derive"] }
+clap = { version = "4.5.20", features = ["derive"] }
 
 [dev-dependencies]
 assert_cmd = "2.0.16"
